@@ -55,6 +55,7 @@ export default defineNoteConfig({
           collapsed: false,
           prefix: '四周目',
           items: [
+            '欢迎手册：萌新入服指南',
             '00四周目简介',
             '01四周目新手指南',
             '02服务器生存公约',

@@ -42,6 +42,7 @@ export default defineNoteConfig({
       prefix: '03公益服务器',
       items: [
         '尘甲-服务器0基础入坑指南',
+        '尘甲-服务器生存公约（通版）',
         {
           text: '联合服-开放中',
           collapsed: false,
@@ -63,6 +64,30 @@ export default defineNoteConfig({
             '04机器命令指南',
             '05已完成的建筑',
             '06计划未来建筑',
+            {
+              text:'服务器封禁案例',
+              collapsed:false,
+              prefix:'服务器封禁案例',
+              items: [
+                '案例一',
+                '案例二',
+                '案例三',
+                '案例四',
+                '案例五',
+                {
+                  text: '案例六',
+                  collapsed: false,
+                  prefix: '案例六',
+                  items: [
+                    '案例六-1',
+                    '案例六-2',
+                    '案例六-3',
+                    '案例六-附件-1',
+                    '案例六-附件-2',
+                  ]
+                },
+              ]
+            }
           ]
         }  
       ]

@@ -1,5 +1,5 @@
 ---
-title: windows版本
+title: Windows版本
 createTime: 2025/05/02 12:43:00
 permalink: /docs/start_guide/windows/
 ---

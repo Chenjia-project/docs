@@ -98,7 +98,10 @@ const docs = defineCollection({
           prefix: '尘甲-服务器0基础入坑指南',
           items: [
             '索引',
+            '关于账号',
+            '关于启动器',
             'windows版本',
+            '进入服务器',
             '常见问题'
           ]
         },

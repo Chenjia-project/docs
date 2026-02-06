@@ -19,12 +19,12 @@ jobs:
       # 基础环境配置
       # ----------------------------------
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
 
       # ----------------------------------
       # 验证执行
@@ -67,17 +67,17 @@ jobs:
     
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: 安装 pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9.15.3
+          version: 10.28.2
           run_install: false
 
       - name: 获取 pnpm 存储目录

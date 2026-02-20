@@ -10,7 +10,7 @@ importers:
     dependencies:
       swiper:
         specifier: ^12.0.3
-        version: 12.1.1
+        version: 12.1.2
     devDependencies:
       '@vuepress/bundler-vite':
         specifier: 2.0.0-rc.26
@@ -35,7 +35,7 @@ importers:
         version: 2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3))
       vuepress-theme-plume:
         specifier: 1.0.0-rc.190
-        version: 1.0.0-rc.190(@types/markdown-it@14.1.2)(@vue/compiler-sfc@3.5.28)(markdown-it@14.1.1)(qrcode@1.5.4)(sass-embedded@1.97.3)(sass@1.97.3)(swiper@12.1.1)(typescript@5.9.3)(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3)))
+        version: 1.0.0-rc.190(@types/markdown-it@14.1.2)(@vue/compiler-sfc@3.5.28)(markdown-it@14.1.1)(qrcode@1.5.4)(sass-embedded@1.97.3)(sass@1.97.3)(swiper@12.1.2)(typescript@5.9.3)(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3)))
 
 packages:
 
@@ -2506,8 +2506,8 @@ packages:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
 
-  swiper@12.1.1:
-    resolution: {integrity: sha512-NB8Uvpu6m725Xf68l2hZBHD184v/ZAi6WIvAorDuR3gRuwCWbGSam233/8seeeIrMJ9isHGk/CTKFdpgeT5u2Q==}
+  swiper@12.1.2:
+    resolution: {integrity: sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==}
     engines: {node: '>= 4.7.0'}
 
   sync-child-process@1.0.2:
@@ -5426,7 +5426,7 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  swiper@12.1.1: {}
+  swiper@12.1.2: {}
 
   sync-child-process@1.0.2:
     dependencies:
@@ -5642,7 +5642,7 @@ snapshots:
       - '@types/markdown-it'
       - typescript
 
-  vuepress-theme-plume@1.0.0-rc.190(@types/markdown-it@14.1.2)(@vue/compiler-sfc@3.5.28)(markdown-it@14.1.1)(qrcode@1.5.4)(sass-embedded@1.97.3)(sass@1.97.3)(swiper@12.1.1)(typescript@5.9.3)(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3))):
+  vuepress-theme-plume@1.0.0-rc.190(@types/markdown-it@14.1.2)(@vue/compiler-sfc@3.5.28)(markdown-it@14.1.1)(qrcode@1.5.4)(sass-embedded@1.97.3)(sass@1.97.3)(swiper@12.1.2)(typescript@5.9.3)(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3))):
     dependencies:
       '@iconify/utils': 3.1.0
       '@iconify/vue': 5.0.0(vue@3.5.28(typescript@5.9.3))
@@ -5687,7 +5687,7 @@ snapshots:
       vuepress: 2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3))
       vuepress-plugin-md-power: 1.0.0-rc.190(@types/markdown-it@14.1.2)(esbuild@0.27.3)(markdown-it@14.1.1)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@25.2.3)(sass-embedded@1.97.3)(sass@1.97.3)(typescript@5.9.3)(yaml@2.8.2))(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3)))
     optionalDependencies:
-      swiper: 12.1.1
+      swiper: 12.1.2
     transitivePeerDependencies:
       - '@75lb/nature'
       - '@mathjax/mathjax-newcm-font'

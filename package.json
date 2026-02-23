@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "尘甲系列服务器文档站",
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@10.30.1",
   "author": "LinRan <i@linran.moe>",
   "license": "CC BY-NC-SA 4.0",
   "engines": {

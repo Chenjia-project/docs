@@ -1,246 +1,38 @@
 name: 文档构建与测试
 
 on:
-  pull_request:
-    branches: [dev, main]
-    paths:
-      - 'docs/**'
-      - 'scripts/**'
-      - '.github/workflows/docs-build-test.yml'
+    pull_request:
+        branches: [dev, main]
+        paths:
+            - "docs/**"
+            - "scripts/**"
+            - ".github/workflows/docs-build-test.yml"
+
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  validate-docs:
-    name: 验证文档
-    runs-on: ubuntu-latest
-    steps:
-      # ----------------------------------
-      # 基础环境配置
-      # ----------------------------------
-      - name: 检出代码
-        uses: actions/checkout@v4
+    docs-check:
+        name: 校验并构建文档
+        runs-on: ubuntu-latest
 
-      - name: 设置 Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@v6
 
-      # ----------------------------------
-      # 验证执行
-      # ----------------------------------
+            - name: 设置 Node.js
+              uses: actions/setup-node@v6
+              with:
+                  cache: npm
 
-      - name: 运行侧边栏验证
-        id: validation
-        run: |
-          set +e
-          node scripts/validate-sidebar.js 2>&1 | tee validation.log
-          exit_code=$?
-          echo "VALIDATION_RESULT<<EOF" >> $GITHUB_ENV
-          cat validation.log >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          exit $exit_code
+            - name: 安装依赖
+              run: npm ci
 
-      - name: 运行图片路径验证
-        id: image-validation
-        run: |
-          set +e
-          node scripts/validate-images.js 2>&1 | tee image-validation.log
-          exit_code=$?
-          echo "IMAGE_VALIDATION_RESULT<<EOF" >> $GITHUB_ENV
-          cat image-validation.log >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          exit $exit_code
-      # ----------------------------------
-      # 失败时终止工作流
-      # ----------------------------------
-      - name: 检查验证结果
-        if: steps.validation.outcome == 'failure'
-        run: |
-          echo "验证失败，请检查配置与实际文件路径是否匹配"
-          exit 1
+            - name: 运行侧边栏验证
+              run: node scripts/validate-sidebar.js
 
-  build:
-    name: 检测构建文档
-    needs: [validate-docs]
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
+            - name: 运行图片路径验证
+              run: node scripts/validate-images.js
 
-      - name: 设置 Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: 安装 pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.15.3
-          run_install: false
-
-      - name: 获取 pnpm 存储目录
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      # - name: 设置 pnpm 缓存
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-store-
-
-      - name: 安装依赖
-        run: pnpm install
-
-      - name: 构建文档
-        run: pnpm docs:build
-
-      # - name: 上传构建产物
-      #   uses: actions/upload-artifact@v4
-      #   if: ${{ !env.ACT }}
-      #   with:
-      #     name: docs-dist
-      #     path: docs/.vuepress/dist
-      #     if-no-files-found: error
-
-  # link-check:
-  #   name: 检查404链接
-  #   needs: build
-  #   runs-on: ubuntu-latest
-    
-  #   steps:
-  #     - name: 检出代码
-  #       uses: actions/checkout@v4
-
-  #     - name: 设置 Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-
-  #     - name: 安装 pnpm
-  #       uses: pnpm/action-setup@v4
-  #       with:
-  #         version: 9.15.3
-  #         run_install: false
-
-  #     - name: 获取 pnpm 存储目录
-  #       id: pnpm-cache
-  #       run: |
-  #         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-  #     - name: 设置 pnpm 缓存
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-  #         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-pnpm-store-
-
-  #     - name: 安装依赖
-  #       run: pnpm install
-
-  #     - name: 下载构建产物
-  #       uses: actions/download-artifact@v4
-  #       if: ${{ !env.ACT }}
-  #       with:
-  #         name: docs-dist
-  #         path: docs/.vuepress/dist
-
-  #     - name: 构建文档（本地）
-  #       if: ${{ env.ACT }}
-  #       run: |
-  #         pnpm install
-  #         pnpm docs:build
-
-  #     - name: 为本地测试创建 dist 目录
-  #       if: ${{ env.ACT }}
-  #       run: |
-  #         mkdir -p docs/.vuepress/dist
-
-      - name: 安装 Hurl
-        run: |
-          # 获取最新版本的Hurl并下载安装
-          LATEST_HURL_VERSION=$(curl -s https://api.github.com/repos/Orange-OpenSource/hurl/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-          curl -LO https://github.com/Orange-OpenSource/hurl/releases/download/${LATEST_HURL_VERSION}/hurl_${LATEST_HURL_VERSION}_amd64.deb
-          sudo dpkg -i hurl_${LATEST_HURL_VERSION}_amd64.deb
-          
-      - name: 创建 Hurl 测试文件
-        run: |
-          mkdir -p tests/hurl
-          
-          # 为中文索引中的所有链接生成 hurl 测试
-          cat > tests/hurl/link-check.hurl << 'EOF'
-          # 检查主页
-          GET http://localhost:8080/
-          HTTP/1.1 200
-          
-          EOF
-          
-          # 自动发现并添加所有HTML文件的测试
-          find docs/.vuepress/dist -type f -name "*.html" | while read file; do
-            # 将文件路径转换为URL路径
-            url_path=${file#docs/.vuepress/dist}
-            if [ "$url_path" = "/index.html" ]; then
-              url_path="/"
-            else
-              url_path=${url_path%.html}
-            fi
-            
-            # 为每个HTML文件添加测试条目
-            cat >> tests/hurl/link-check.hurl << EOF
-
-          # 检查 ${url_path}
-          GET http://localhost:8080${url_path}
-          HTTP/1.1 200
-          EOF
-          done
-
-      - name: 启动本地服务器并运行测试
-        run: |
-          # 在后台启动服务器
-          npx http-server docs/.vuepress/dist -p 8080 &
-          SERVER_PID=$!
-          
-          # 等待服务器启动
-          sleep 5
-          
-          # 运行 Hurl 测试
-          echo "运行链接检查..."
-          if ! hurl --test tests/hurl/link-check.hurl; then
-            echo "::error::某些链接无法访问。请检查上面的输出了解详情。"
-            kill $SERVER_PID
-            exit 1
-          fi
-          
-          # 停止服务器
-          kill $SERVER_PID
-          
-          echo "所有链接检查通过！"
-          
-  test-results:
-    name: 测试结果
-    needs: [build, validate-docs]
-    runs-on: ubuntu-latest
-    if: always()
-    
-    steps:
-      - name: 检查构建状态
-        if: needs.build.result != 'success'
-        run: |
-          echo "构建任务失败"
-          exit 1
-          
-      - name: 检查路径图片检查状态
-        if: needs.validate-docs.result != 'success'
-        run: |
-          echo "路径图片检查任务失败"
-          exit 1
-          
-      - name: 所有测试通过
-        run: |
-          echo "✅ 所有测试成功通过！"
-          echo "构建和检查已完成，无任何问题。"
+            - name: 构建文档
+              run: npm run docs:build

@@ -1,9 +1,8 @@
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 
-// 获取命令行参数
 const args = process.argv.slice(2);
-const targetDir = args[0] || './docs/notes/docs';
+const targetDir = args[0] || './docs/docs';
 
 // 图片根目录
 const imageRoot = './docs/.vuepress/public';

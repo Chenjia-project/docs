@@ -5,6 +5,6 @@
 *.jpg binary
 *.jpeg binary
 *.ico binary
-*.tff binary
+*.ttf binary
 *.woff binary
 *.woff2 binary

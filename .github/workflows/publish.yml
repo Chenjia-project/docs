@@ -1,0 +1,41 @@
+name: Build site and publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Public
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Nothing but nix
+        uses: wimpysworld/nothing-but-nix@main
+        with:
+          hatchet-protocol: rampage
+          root-safe-haven: 2048
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Build site
+        run: |
+          nix build .#chenjia-docs --print-out-paths
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy result/ --project-name=chenjia-docs

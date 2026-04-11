@@ -1,27 +1,38 @@
-# 尘甲系列服务器文档站
+# Chenjia Docs
 
-The Site is generated using [vuepress](https://vuepress.vuejs.org/) and [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume)
+Documentation site for the Chenjia game servers.
+
+Built with [VuePress](https://vuepress.vuejs.org/) and [vuepress-theme-plume](https://theme-plume.vuejs.press/).
 
 ## Install
 
 ```sh
-pnpm i
+npm install
 ```
 
 ## Usage
 
 ```sh
-# start dev server
-pnpm docs:dev
+# start development server
+npm run docs:dev
+
 # build for production
-pnpm docs:build
-# preview production build in local
-pnpm docs:preview
-# update vuepress and theme
-pnpm vp-update
+npm run docs:build
+
+# preview production build locally
+npm run docs:preview
+
+# update VuePress and theme dependencies
+npm run vp-update
 ```
 
-## Documents
+## Project links
 
-- [vuepress](https://vuepress.vuejs.org/)
+- Site source: [docs/](docs/)
+- Content source: [docs/docs/](docs/docs/)
+- Repository: [Chenjia-project/docs](https://github.com/Chenjia-project/docs)
+
+## References
+
+- [VuePress](https://vuepress.vuejs.org/)
 - [vuepress-theme-plume](https://theme-plume.vuejs.press/)

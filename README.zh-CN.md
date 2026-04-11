@@ -1,27 +1,38 @@
 # 尘甲系列服务器文档站
 
-网站使用 [vuepress](https://vuepress.vuejs.org/) 和 [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume) 构建生成。
+尘甲系列服务器的文档站点。
 
-## Install
+站点基于 [VuePress](https://vuepress.vuejs.org/) 和 [vuepress-theme-plume](https://theme-plume.vuejs.press/) 构建。
+
+## 安装
 
 ```sh
-pnpm i
+npm install
 ```
 
-## Usage
+## 使用
 
 ```sh
 # 启动开发服务
-pnpm docs:dev
-# 构建生产包
-pnpm docs:build
-# 本地预览生产服务
-pnpm docs:preview
-# 更新 vuepress 和主题
-pnpm vp-update
+npm run docs:dev
+
+# 构建生产版本
+npm run docs:build
+
+# 本地预览生产版本
+npm run docs:preview
+
+# 更新 VuePress 与主题依赖
+npm run vp-update
 ```
 
-## 文档
+## 项目链接
 
-- [vuepress](https://vuepress.vuejs.org/)
+- 站点源码目录：[`docs/`](docs/)
+- 文档内容目录：[`docs/docs/`](docs/docs/)
+- 仓库地址：[Chenjia-project/docs](https://github.com/Chenjia-project/docs)
+
+## 参考文档
+
+- [VuePress](https://vuepress.vuejs.org/)
 - [vuepress-theme-plume](https://theme-plume.vuejs.press/)

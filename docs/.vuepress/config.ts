@@ -9,9 +9,32 @@
  * 特别的，请不要在两个配置文件中重复配置相同的项，当前文件的配置项会被覆盖
  */
 
+import { readFileSync, realpathSync, statSync } from 'node:fs'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
+
+const vueCompilerFs = {
+  fileExists(file: string) {
+    try {
+      return statSync(file).isFile()
+    }
+    catch {
+      return false
+    }
+  },
+  readFile(file: string) {
+    try {
+      return readFileSync(file, 'utf8')
+    }
+    catch {
+      return undefined
+    }
+  },
+  realpath(file: string) {
+    return realpathSync(file)
+  },
+}
 
 export default defineUserConfig({
   base: '/',
@@ -24,7 +47,13 @@ export default defineUserConfig({
     ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],
   ],
 
-  bundler: viteBundler(),
+  bundler: viteBundler({
+    vuePluginOptions: {
+      script: {
+        fs: vueCompilerFs,
+      },
+    },
+  }),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({

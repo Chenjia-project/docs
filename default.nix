@@ -26,6 +26,7 @@ buildNpmPackage (finalAttrs: {
   };
 
   npmConfigHook = importNpmLock.npmConfigHook;
+  npmFlags = [ "--legacy-peer-deps" ];
 
   env.CI = true;
   npmBuildScript = "docs:build";

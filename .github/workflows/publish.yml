@@ -18,17 +18,17 @@ jobs:
             deployments: write
         steps:
             - name: Install nix
-              uses: cachix/install-nix-action@v31
+              uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
 
             - name: Checkout
-              uses: actions/checkout@v7
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
             - name: Build site
               run: |
                   nix build .#chenjia-docs --print-out-paths
 
             - name: Publish to Cloudflare Pages
-              uses: cloudflare/wrangler-action@v4
+              uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

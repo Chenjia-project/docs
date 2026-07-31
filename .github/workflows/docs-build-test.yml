@@ -18,11 +18,12 @@ jobs:
 
         steps:
             - name: 检出代码
-              uses: actions/checkout@v7
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
             - name: 设置 Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
               with:
+                  node-version: "latest"
                   cache: npm
 
             - name: 安装依赖

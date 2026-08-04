@@ -25,11 +25,13 @@ jobs:
 
             - name: Build site
               run: |
-                  nix build .#chenjia-docs --print-out-paths
+                  nix build .#chenjia-docs --print-out-paths | tee store_path
+                  echo "store_path=$(<store_path)" >> "$GITHUB_ENV"
+                  find . -mindepth 1 -delete
 
             - name: Publish to Cloudflare Pages
               uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  command: pages deploy result/ --project-name=chenjia-docs
+                  command: pages deploy ${{ env.store_path }} --project-name=chenjia-docs
